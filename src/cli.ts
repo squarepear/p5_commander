@@ -7,16 +7,16 @@ import { run as runServe } from "./commands/serve.ts";
 
 const args = parse(Deno.args);
 
-export function run() {
+export async function run() {
   switch (args._[0].toString().toLowerCase()) {
     case "create":
-      runCreate(args);
+      await runCreate(args);
       return;
     case "new":
-      runNew(args);
+      await runNew(args);
       return;
     case "serve":
-      runServe(args);
+      await runServe(args);
       return;
     default:
       console.log("Command not found!");

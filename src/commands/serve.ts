@@ -2,6 +2,6 @@
 
 import { Args } from "../../deps.ts";
 
-export function run(args: Args) {
-  console.log("Serve!");
+export async function run(args: Args) {
+  await console.log("Serve!");
 }
