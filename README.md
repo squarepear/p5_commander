@@ -36,7 +36,7 @@ p5 new my_collection
 ### Creating a sketch in the collection
 
 ```sh
-p5 create my_sketch
+p5 generate my_sketch
 ```
 
 ### Running your sketches

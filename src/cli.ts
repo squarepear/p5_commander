@@ -1,7 +1,7 @@
 // Determine which commands to run from command line interface
 
 import { parse } from "../deps.ts";
-import { run as runCreate } from "./commands/create.ts";
+import { run as runGenerate } from "./commands/generate.ts";
 import { run as runNew } from "./commands/new.ts";
 import { run as runServe } from "./commands/serve.ts";
 
@@ -11,9 +11,10 @@ export async function run() {
   if (args._.length == 0) return;
 
   switch (args._[0].toString().toLowerCase()) {
-    case "create":
-    case "c":
-      await runCreate(args);
+    case "generate":
+    case "gen":
+    case "g":
+      await runGenerate(args);
       return;
     case "new":
     case "n":
