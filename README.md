@@ -22,7 +22,7 @@
 ## Installation
 
 ```sh
-deno install -n p5 https://deno.land/x/p5_commander/mod.ts
+deno install -f -A --unstable -n p5 https://deno.land/x/p5_commander/mod.ts
 ```
 
 ## Usage
@@ -30,13 +30,13 @@ deno install -n p5 https://deno.land/x/p5_commander/mod.ts
 ### Creating a collection
 
 ```sh
-p5 new p5collection
+p5 new my_collection
 ```
 
 ### Creating a sketch in the collection
 
 ```sh
-p5 create p5sketch
+p5 create my_sketch
 ```
 
 ### Running your sketches
