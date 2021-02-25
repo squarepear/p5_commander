@@ -1,7 +1,8 @@
 // Make a new p5 sketch inside an existing collection
 
-import { Args, copy, ensureDir, exists, join, walk } from "../../deps.ts";
-import { download, isCollection } from "../utils.ts";
+import { Args, copy, exists, join, walk } from "../../deps.ts";
+
+import { isCollection } from "../utils.ts";
 
 export async function run(args: Args) {
   if (args._.length != 2) {
