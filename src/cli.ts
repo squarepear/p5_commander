@@ -20,6 +20,7 @@ export async function run() {
     case "n":
       await runNew(args);
       return;
+    case "server":
     case "serve":
     case "s":
       await runServe(args);
