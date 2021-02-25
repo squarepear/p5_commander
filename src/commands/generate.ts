@@ -16,7 +16,7 @@ export async function run(args: Args) {
   const path = join(Deno.cwd(), "sketches", name);
   const templatePath = join(
     new URL(".", import.meta.url).pathname,
-    "../../template",
+    "../../templates/sketch",
   );
 
   if (await exists(path)) return console.log(`${name} already exists!`);
