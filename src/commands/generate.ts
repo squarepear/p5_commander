@@ -3,8 +3,9 @@
 import { Args, copy, exists, join, walk } from "../../deps.ts";
 
 import { isCollection } from "../utils.ts";
+import { root } from "../../mod.ts";
 
-export async function run(args: Args) {
+export default async (args: Args) => {
   if (args._.length != 2) {
     return console.log("Must supply a name for the sketch!");
   }
@@ -15,8 +16,8 @@ export async function run(args: Args) {
   const name = args._[1].toString();
   const path = join(Deno.cwd(), "sketches", name);
   const templatePath = join(
-    new URL(".", import.meta.url).pathname,
-    "../../templates/sketch",
+    root,
+    "templates/sketch",
   );
 
   if (await exists(path)) return console.log(`${name} already exists!`);
@@ -37,4 +38,4 @@ export async function run(args: Args) {
   }
 
   console.log("Sketch created!");
-}
+};

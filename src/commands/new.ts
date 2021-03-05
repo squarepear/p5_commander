@@ -3,7 +3,7 @@
 import { Args, ensureDir, exists, join } from "../../deps.ts";
 import { download, isCollection } from "../utils.ts";
 
-export async function run(args: Args) {
+export default async (args: Args) => {
   if (args._.length != 2) {
     return console.log("Must supply a name for the collection!");
   }
@@ -29,4 +29,4 @@ export async function run(args: Args) {
   // TODO: Download extra p5 libraries and typings
 
   console.log("Collection created!");
-}
+};

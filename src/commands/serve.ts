@@ -2,9 +2,9 @@
 
 import { Args } from "../../deps.ts";
 import { isCollection } from "../utils.ts";
-import { start } from "../server.ts";
+import start from "../server/server.ts";
 
-export async function run(args: Args) {
+export default async (args: Args) => {
   if (!await isCollection(Deno.cwd())) {
     return console.log("You are not in a p5 collection!");
   }
@@ -13,4 +13,4 @@ export async function run(args: Args) {
   const port = args.p ?? args.port ?? 8080;
 
   await start(path, port);
-}
+};
