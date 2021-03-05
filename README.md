@@ -22,7 +22,9 @@
 ## Installation
 
 ```sh
-deno install -f -A --unstable -n p5 https://deno.land/x/p5_commander/mod.ts
+git clone https://github.com/SquarePear/p5_commander.git
+cd p5_commander
+deno install -f -A --unstable -n p5 mod.ts
 ```
 
 ## Usage
