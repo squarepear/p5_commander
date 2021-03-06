@@ -1,6 +1,6 @@
 // Make a new p5 sketch inside an existing collection
 
-import { Args, copy, exists, join, walk } from "../../deps.ts";
+import { Args, copy, engineFactory, exists, join, walk } from "../../deps.ts";
 
 import { isCollection } from "../utils.ts";
 import { root } from "../../mod.ts";
@@ -24,16 +24,21 @@ export default async (args: Args) => {
 
   await copy(templatePath, path);
 
+  const handlebarsEngine = engineFactory.getHandlebarsEngine();
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
 
-  for await (const entry of walk(path, { includeDirs: false })) {
-    const data = decoder.decode(await Deno.readFile(entry.path))
-      .replaceAll("{{name}}", name);
+  const data = {
+    name,
+  };
 
+  for await (const entry of walk(path, { includeDirs: false })) {
     await Deno.writeFile(
       entry.path,
-      encoder.encode(data),
+      encoder.encode(handlebarsEngine(
+        decoder.decode(await Deno.readFile(entry.path)),
+        data,
+      )),
     );
   }
 
