@@ -1,0 +1,58 @@
+:root {
+  --main-color: #ddd;
+  --header-color: #315659;
+  --accent-color: #ea9010;
+}
+
+* {
+  text-decoration: none;
+  color: var(--accent-color);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--main-color);
+}
+
+body > header {
+  flex-shrink: 1;
+  display: flex;
+  flex-direction: row;
+
+  padding: 0 1.5em;
+
+  background-color: var(--header-color);
+}
+
+body > header > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+body > header > #title {
+  text-align: left;
+  flex-shrink: 1;
+}
+
+body > header > :not(#title) {
+  text-align: right;
+  flex-grow: 1;
+  display: table-cell;
+  vertical-align: middle;
+  line-height: 2em;
+}
+
+body > :not(header) {
+  flex-grow: 1;
+}

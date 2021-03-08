@@ -6,13 +6,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{collection}}</title>
+
+  <link rel="stylesheet" type="text/css" href="/static/style.css">
+  <link rel="stylesheet" type="text/css" href="/static/index.css">
 </head>
 
 <body>
-  <h1>{{collection}}</h1>
-  {{#each sketches}}
-  <a href="/sketch/{{this}}">{{this}}</a>
-  {{/each}}
+  <header>
+    <h1 id="title"><a href="/">{{collection}}</a></h1>
+  </header>
+
+  <div id="sketches">
+    {{#each sketches}}
+    <a class="sketch" href="/sketch/{{this}}">
+      <div>
+        <iframe src="/sketch/{{this}}/index.html" frameborder="0" width=200 height=200></iframe>
+        <p>{{this}}</p>
+      </div>
+    </a>
+    {{/each}}
+  </div>
 </body>
 
 </html>

@@ -25,6 +25,7 @@ export default async (path: string, port: number) => {
   const data = { collection, sketches };
 
   const viewsPath = join(root, "src", "server", "views");
+  const staticPath = join(root, "src", "server", "static");
   const librariesPath = join(path, "libraries");
   const sketchesPath = join(path, "sketches");
 
@@ -69,6 +70,13 @@ export default async (path: string, port: number) => {
 
       await send(ctx, ctx.params.file, {
         root: librariesPath,
+      });
+    })
+    .get("/static/:file", async (ctx) => {
+      if (!ctx.params?.file) return;
+
+      await send(ctx, ctx.params.file, {
+        root: staticPath,
       });
     });
 

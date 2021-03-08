@@ -7,23 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{collection}}</title>
 
-  <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
-
-    iframe {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="/static/style.css">
+  <link rel="stylesheet" type="text/css" href="/static/sketch.css">
 </head>
 
 <body>
+  <header>
+    <h1 id="title"><a href="/">{{collection}}</a></h1>
+
+    <h3>{{sketch}}</h3>
+  </header>
+
   <iframe src="/sketch/{{sketch}}/index.html" frameborder="0"></iframe>
 </body>
 
