@@ -1,6 +1,6 @@
 // Make a new p5 collection
 
-import { Args, ensureDir, exists, join } from "../../deps.ts";
+import { Args, ensureDir, exists, getReleaseURL, join } from "../../deps.ts";
 import { download, isCollection } from "../utils.ts";
 
 export default async (args: Args) => {
@@ -21,8 +21,15 @@ export default async (args: Args) => {
 
   console.log("Downloading necessary p5 libraries and typings");
 
+  const p5Url = (await getReleaseURL({
+    provider: "github",
+    user: "processing",
+    repo: "p5.js",
+    part: "p5.min.js",
+  }))[0];
+
   await download(
-    "https://github.com/processing/p5.js/releases/download/1.2.0/p5.js",
+    p5Url,
     join(path, "libraries/p5.js"),
   );
 
