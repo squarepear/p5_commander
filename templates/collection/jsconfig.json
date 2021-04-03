@@ -1,0 +1,7 @@
+{
+  "include": [
+    "**/*.js",
+    "libraries/*.js",
+    "libraries/@types/p5/global.d.ts"
+  ]
+}

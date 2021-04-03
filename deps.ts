@@ -19,3 +19,4 @@ export {
 export type { Args } from "https://deno.land/std@0.88.0/flags/mod.ts";
 export { default as getReleaseURL } from "https://deno.land/x/get_release_url@1.0.0/mod.ts";
 export { parse } from "https://deno.land/std@0.88.0/flags/mod.ts";
+export { tgz } from "https://raw.githubusercontent.com/SquarePear/compress/patch-1/mod.ts";

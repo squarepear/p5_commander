@@ -1,7 +1,17 @@
 // Make a new p5 collection
 
-import { Args, ensureDir, exists, getReleaseURL, join } from "../../deps.ts";
+import {
+  Args,
+  copy,
+  ensureDir,
+  exists,
+  getReleaseURL,
+  join,
+  tgz,
+} from "../../deps.ts";
 import { download, isCollection } from "../utils.ts";
+
+import { root } from "../../mod.ts";
 
 export default async (args: Args) => {
   if (args._.length != 2) {
@@ -13,10 +23,17 @@ export default async (args: Args) => {
 
   const name = args._[1].toString();
   const path = join(Deno.cwd(), name);
+  const typesPath = join(path, "libraries", "@types");
+  const templatePath = join(
+    root,
+    "templates/collection",
+  );
 
   if (await exists(path)) return console.log(`${name} already exists!`);
 
-  await ensureDir(join(path, "libraries"));
+  await copy(templatePath, path);
+
+  await ensureDir(typesPath);
   await ensureDir(join(path, "sketches"));
 
   console.log("Downloading necessary p5 libraries and typings");
@@ -32,6 +49,19 @@ export default async (args: Args) => {
     p5Url,
     join(path, "libraries/p5.js"),
   );
+
+  const p5typesUrl =
+    (await (await fetch("https://registry.npmjs.org/@types/p5/latest")).json())
+      .dist.tarball;
+
+  const tmpDir = await Deno.makeTempDir();
+  const p5tgzPath = join(tmpDir, "p5.tar.gz");
+
+  await download(p5typesUrl, p5tgzPath);
+
+  await tgz.uncompress(p5tgzPath, typesPath);
+
+  await Deno.remove(tmpDir, { recursive: true });
 
   // TODO: Download extra p5 libraries and typings
 
