@@ -1,5 +1,5 @@
 <div align="center">
-    <!-- <img src="assets/logo.svg" width="400" height="400" alt="Socket icon"> -->
+    <img src="src/server/static/favicon.svg" width="256" height="256" alt="p5_commander icon">
     <h1>p5 Commander</h1>
     <p>
         <b>Easy management of <a href="https://p5js.org">p5.js</a> sketches</a></b>
