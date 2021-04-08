@@ -1,6 +1,7 @@
 // Determine which commands to run from command line interface
 
 import { parse } from "../deps.ts";
+import runDev from "./commands/dev.ts";
 import runGenerate from "./commands/generate.ts";
 import runNew from "./commands/new.ts";
 import runServe from "./commands/serve.ts";
@@ -26,6 +27,10 @@ export default async () => {
     case "serve":
     case "s":
       await runServe(args);
+      return;
+    case "dev":
+    case "d":
+      await runDev(args);
       return;
     default:
       console.log("Command not found!");

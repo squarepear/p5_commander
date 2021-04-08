@@ -46,3 +46,9 @@ p5 generate my_sketch
 ```sh
 p5 serve
 ```
+
+### Sketch development server with live reloading
+
+```sh
+p5 dev
+```

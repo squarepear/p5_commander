@@ -13,7 +13,11 @@ import {
 
 import { root } from "../../mod.ts";
 
-export default async (path: string, port: number) => {
+export default async (
+  path: string,
+  port: number,
+  developmentMode = false,
+) => {
   const valid =
     !(typeof (port) !== "number" || Math.floor(port) != port || port <= 0);
 
@@ -66,7 +70,12 @@ export default async (path: string, port: number) => {
 
       await ctx.render(
         join(viewsPath, "sketch.handlebars"),
-        { ...data, sketch: ctx.params.sketch },
+        {
+          ...data,
+          sketch: ctx.params.sketch,
+          developmentMode,
+          host: ctx.request.url.host,
+        },
       );
     })
     .get("/libraries/:file", async (ctx) => {
@@ -83,6 +92,28 @@ export default async (path: string, port: number) => {
         root: staticPath,
       });
     });
+
+  // Development mode auto-reloading
+  if (developmentMode) {
+    router.get("/socket/:sketch", async (ctx) => {
+      if (!ctx.params?.sketch || !ctx.isUpgradable) return;
+
+      // Create socket
+      const sock = await ctx.upgrade();
+
+      // Create file watcher
+      const watcher = Deno.watchFs(join(path, "sketches", ctx.params.sketch));
+
+      // Listen for file update
+      for await (const event of watcher) {
+        // Close file watcher if socket is closed
+        if (sock.isClosed) return;
+
+        // Notify socket on file reload
+        await sock.send("reload");
+      }
+    });
+  }
 
   // Use router
   app.use(router.routes());

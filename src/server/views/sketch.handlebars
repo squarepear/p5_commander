@@ -18,7 +18,34 @@
     <h3>{{sketch}}</h3>
   </header>
 
-  <iframe src="/sketch/{{sketch}}/index.html" frameborder="0"></iframe>
+  <iframe src="/sketch/{{sketch}}/index.html" frameborder="0" id="sketch"></iframe>
+
+  {{#if developmentMode}}
+  <script>
+    let pipe = new WebSocket(`ws://{{host}}/socket/{{sketch}}`);
+    const frame = document.getElementById('sketch')
+
+    function reload() {
+      frame.src += ''
+    }
+
+    // Reload iframe on socket event
+    pipe.addEventListener('message', reload)
+
+    // Automatically reconnect if connection lost
+    function reconnect() {
+      console.log("Reconnecting...")
+      if (pipe.readyState == pipe.CONNECTING) return setTimeout(reconnect, 1000)
+      if (pipe.readyState != pipe.CLOSED) return
+
+      pipe = new WebSocket(`ws://{{host}}/socket/{{sketch}}`);
+      pipe.addEventListener('message', reload)
+      setTimeout(reconnect, 1000)
+    }
+
+    pipe.onclose = reconnect
+  </script>
+  {{/if}}
 </body>
 
 </html>
