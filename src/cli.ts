@@ -5,11 +5,13 @@ import runGenerate from "./commands/generate.ts";
 import runNew from "./commands/new.ts";
 import runServe from "./commands/serve.ts";
 
+// Parse arguments
 const args = parse(Deno.args);
 
 export default async () => {
   if (args._.length == 0) return;
 
+  // Run proper module based on arguments
   switch (args._[0].toString().toLowerCase()) {
     case "generate":
     case "gen":

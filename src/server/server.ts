@@ -17,6 +17,7 @@ export default async (path: string, port: number) => {
   const valid =
     !(typeof (port) !== "number" || Math.floor(port) != port || port <= 0);
 
+  // Exit if port is invalid
   if (!valid) return console.log("Invalid port!");
 
   const collection = basename(path);
@@ -29,6 +30,7 @@ export default async (path: string, port: number) => {
   const librariesPath = join(path, "libraries");
   const sketchesPath = join(path, "sketches");
 
+  // Get all sketches
   for await (const entry of Deno.readDir(sketchesPath)) {
     if (entry.isDirectory) sketches.push(entry.name);
   }
@@ -37,8 +39,10 @@ export default async (path: string, port: number) => {
   const oakAdapter = adapterFactory.getOakAdapter();
   const app = new Oak();
 
+  // Use handlebars template engine
   app.use(viewEngine(oakAdapter, handlebarsEngine));
 
+  // Create router
   const router = new Router()
     .get("/", (ctx) => {
       ctx.render(join(viewsPath, "index.handlebars"), data);
@@ -80,9 +84,11 @@ export default async (path: string, port: number) => {
       });
     });
 
+  // Use router
   app.use(router.routes());
   app.use(router.allowedMethods());
 
+  // Log on server start
   app.addEventListener("listen", ({ hostname, port, secure }) => {
     console.log(
       `Listening on: ${secure ? "https://" : "http://"}${hostname ??
@@ -90,5 +96,6 @@ export default async (path: string, port: number) => {
     );
   });
 
+  // Start server
   await app.listen({ port });
 };
