@@ -1,0 +1,13 @@
+[package]
+name = "p5_commander"
+authors = ["Jeffrey Harmon <contact@jeffreyharmon.dev>"]
+description = "A command line tool to easily create and manage p5 sketches"
+version = "2.0.0"
+edition = "2021"
+
+[[bin]]
+name = "p5"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.0.29", features = ["derive"] }
