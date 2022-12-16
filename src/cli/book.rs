@@ -6,6 +6,7 @@ use clap::Subcommand;
 pub enum Commands {
     /// Create a new sketchbook
     New {
+        #[arg(default_value = "sketchbook")]
         name: String,
         #[arg(default_value = ".")]
         path: String,
