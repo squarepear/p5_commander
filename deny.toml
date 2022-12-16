@@ -1,0 +1,6 @@
+[licenses]
+unlicensed = "deny"
+allow = [
+    "MIT",
+    "Unicode-DFS-2016",
+]

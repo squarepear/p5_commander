@@ -37,9 +37,22 @@
 
         devShell = pkgs.devshell.mkShell {
           name = "rust-shell";
-          packages = builtins.attrValues {
-            inherit (pkgs) rust-analyzer rustup zlib pkg-config gcc;
-          };
+          packages = with pkgs; [
+            rust-analyzer
+            rustup
+            zlib
+            pkgconfig
+            gcc
+            openssl
+            openssl.dev
+          ];
+
+          env = [
+            {
+              name = "PKG_CONFIG_PATH";
+              value = "${pkgs.openssl.dev}/lib/pkgconfig";
+            }
+          ];
         };
       });
 }

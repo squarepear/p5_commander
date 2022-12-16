@@ -94,3 +94,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/rust,direnv,linux,macos,windows
+
+# Directory for testing the program
+/testing/

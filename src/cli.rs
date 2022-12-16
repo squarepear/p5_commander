@@ -41,9 +41,7 @@ pub fn run() {
         Some(Commands::Book { command }) => book::run(command),
         Some(Commands::Sketch { command }) => sketch::run(command),
         Some(Commands::Serve { dev }) => serve::run(dev),
-        None => {
-            // Print help
-        }
+        None => println!("No command provided"),
     }
 }
 
